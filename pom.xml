@@ -89,6 +89,11 @@
             <artifactId>mybatis-plus</artifactId>
             <version>3.1.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>20.0</version>
+        </dependency>
 
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -116,6 +121,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>cn.javaer.aliyun</groupId>
+            <artifactId>aliyun-spring-boot-starter-oss</artifactId>
+            <version>1.1.0</version>
         </dependency>
     </dependencies>
 

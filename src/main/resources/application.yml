@@ -12,4 +12,16 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://39.96.69.79:3307/luoo?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
-    password: password
+    password:
+  servlet:
+    multipart:
+      max-request-size: 500MB
+      max-file-size: 500MB
+
+
+## aliyun
+aliyun:
+  oss.bucketname: riverluooo
+  oss.endpoint:
+  oss.accessKeyId:
+  oss.accessKeySecret:

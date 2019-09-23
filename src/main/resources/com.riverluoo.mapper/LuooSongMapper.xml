@@ -12,11 +12,13 @@
         <result column="artist" property="artist" />
         <result column="lyric" property="lyric" />
         <result column="time" property="time" />
+        <result column="music" property="music" />
+        <result column="url" property="url" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, volume_id, sequence, album, song, artist, lyric, time
+        id, volume_id, sequence, album, song, artist, lyric, time, music, url
     </sql>
 
 </mapper>
