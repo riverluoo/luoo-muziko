@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.riverluoo.mapper.LuooSongMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.riverluoo.entity.LuooSong">
+        <id column="id" property="id" />
+        <result column="volume_id" property="volumeId" />
+        <result column="sequence" property="sequence" />
+        <result column="album" property="album" />
+        <result column="song" property="song" />
+        <result column="artist" property="artist" />
+        <result column="lyric" property="lyric" />
+        <result column="time" property="time" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, volume_id, sequence, album, song, artist, lyric, time
+    </sql>
+
+</mapper>

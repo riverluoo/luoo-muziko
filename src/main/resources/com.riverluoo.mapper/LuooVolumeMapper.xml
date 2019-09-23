@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.riverluoo.mapper.LuooVolumeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.riverluoo.entity.LuooVolume">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="caption" property="caption" />
+        <result column="url" property="url" />
+        <result column="release_time" property="releaseTime"/>
+        <result column="author" property="author" />
+        <result column="star" property="star" />
+        <result column="remark" property="remark" />
+        <result column="thank" property="thank" />
+        <result column="number" property="number" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, title, caption, url, release_time, author, star, remark, thank, number
+    </sql>
+
+</mapper>
