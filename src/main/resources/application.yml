@@ -25,3 +25,7 @@ aliyun:
   oss.endpoint:
   oss.accessKeyId:
   oss.accessKeySecret:
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
