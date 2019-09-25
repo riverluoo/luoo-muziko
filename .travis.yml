@@ -1,0 +1,17 @@
+language: base
+services:
+  - openjdk8
+  - docker
+
+notifications:
+  email: 769789170@qq.com
+sudo: required
+
+branches:
+  only:
+    - master
+
+script:
+  - mvn clean
+  - mvn install
+  - docker build -t luoo-muziko .
