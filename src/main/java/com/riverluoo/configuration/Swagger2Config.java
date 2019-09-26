@@ -28,8 +28,8 @@ public class Swagger2Config {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("落网 APIs")
-                .description("swagger-bootstrap-ui")
-                .termsOfServiceUrl("http://localhost:8000/")
+                .description("停在路上 看前面迷雾 看后来人潮")
+                .termsOfServiceUrl("https://riverluoo.com")
                 .version("1.0")
                 .build();
     }

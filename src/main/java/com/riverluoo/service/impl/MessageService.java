@@ -30,6 +30,8 @@ public class MessageService {
     @Autowired
     private IAcsClient acsClient;
     @Autowired
+    private LoginService loginService;
+    @Autowired
     private StringRedisTemplate redisTemplate;
     @Autowired
     private ApplicationEventPublisher publisher;
@@ -61,6 +63,8 @@ public class MessageService {
             this.redisTemplate.delete(PREFIX + phone);
             UserEvent userEvent = new UserEvent(phone);
             this.publisher.publishEvent(userEvent);
+
+            this.loginService.login(phone);
         }
 
         return isPass;
