@@ -5,8 +5,10 @@ import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
+import com.riverluoo.common.event.business.UserEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -29,6 +31,8 @@ public class MessageService {
     private IAcsClient acsClient;
     @Autowired
     private StringRedisTemplate redisTemplate;
+    @Autowired
+    private ApplicationEventPublisher publisher;
 
     private static final String PREFIX = "SMS_V_";
 
@@ -55,6 +59,8 @@ public class MessageService {
         boolean isPass = Objects.equals(code, value);
         if (isPass) {
             this.redisTemplate.delete(PREFIX + phone);
+            UserEvent userEvent = new UserEvent(phone);
+            this.publisher.publishEvent(userEvent);
         }
 
         return isPass;

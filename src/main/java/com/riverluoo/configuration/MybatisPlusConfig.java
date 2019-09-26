@@ -1,6 +1,7 @@
 package com.riverluoo.configuration;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.riverluoo.common.plugin.ColumnFillHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,6 +17,11 @@ public class MybatisPlusConfig {
         PaginationInterceptor page = new PaginationInterceptor();
         page.setDialectType("mysql");
         return page;
+    }
+
+    @Bean
+    public ColumnFillHandler columnFillHandler(){
+        return new ColumnFillHandler();
     }
 
 
