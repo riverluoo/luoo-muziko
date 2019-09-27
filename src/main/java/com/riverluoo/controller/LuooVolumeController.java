@@ -13,6 +13,8 @@ import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,14 +42,21 @@ public class LuooVolumeController {
                            @RequestParam(required = false, defaultValue = "0") int pageId,
                            @ApiParam(name = "pageSize", value = "页长")
                            @RequestParam(required = false, defaultValue = "10") int pageSize,
-                           @RequestParam(name = "id",required = false) @ApiParam("期刊编号") Integer id,
-                           @RequestParam(name = "title",required = false) @ApiParam("期刊编号") String title) {
+                           @RequestParam(name = "id", required = false) @ApiParam("期刊编号") Integer id,
+                           @RequestParam(name = "title", required = false) @ApiParam("期刊编号") String title) {
 
-        Page<LuooVolume> page = new Page<>(pageId,pageSize);
+        Page<LuooVolume> page = new Page<>(pageId, pageSize);
 
-        IPage<LuooVolume> volumeIPage = this.luooVolumeService.page(page, new QueryWrapper<LuooVolume>().eq(null !=id,LuooVolume.ID, id).like(StringUtils.isNotBlank(title),LuooVolume.TITLE, title));
+        IPage<LuooVolume> volumeIPage = this.luooVolumeService.page(page, new QueryWrapper<LuooVolume>().eq(null != id, LuooVolume.ID, id).like(StringUtils.isNotBlank(title), LuooVolume.TITLE, title));
         return HttpResult.success(volumeIPage);
 
+    }
+
+    @ApiOperation("落网期刊-修改")
+    @PostMapping("/update")
+    public HttpResult update(@RequestBody LuooVolume luooVolume) {
+
+        return HttpResult.success(this.luooVolumeService.updateById(luooVolume));
     }
 
 }
