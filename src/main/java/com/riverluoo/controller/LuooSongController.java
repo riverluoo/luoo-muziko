@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,7 +44,7 @@ public class LuooSongController {
 
 
     @ApiOperation("落网歌曲-修改")
-    @PostMapping("/update")
+    @PutMapping("/update")
     public HttpResult update(@RequestBody LuooSong luooSong) {
         return HttpResult.success(this.luooSongService.updateById(luooSong));
     }

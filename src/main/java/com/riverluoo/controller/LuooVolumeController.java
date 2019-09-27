@@ -13,10 +13,9 @@ import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -53,7 +52,7 @@ public class LuooVolumeController {
     }
 
     @ApiOperation("落网期刊-修改")
-    @PostMapping("/update")
+    @PutMapping("/update")
     public HttpResult update(@RequestBody LuooVolume luooVolume) {
 
         return HttpResult.success(this.luooVolumeService.updateById(luooVolume));

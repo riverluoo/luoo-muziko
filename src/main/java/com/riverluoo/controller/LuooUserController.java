@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,7 +31,7 @@ public class LuooUserController {
     private LuooUserService luooUserService;
 
     @ApiOperation("用户-修改")
-    @PostMapping("/update")
+    @PutMapping("/update")
     public HttpResult update(@RequestBody LuooUser luooUser) {
 
         return HttpResult.success(this.luooUserService.updateById(luooUser));
