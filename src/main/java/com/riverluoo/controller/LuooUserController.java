@@ -7,11 +7,11 @@ import com.riverluoo.service.LuooUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -35,6 +35,13 @@ public class LuooUserController {
     public HttpResult update(@RequestBody LuooUser luooUser) {
 
         return HttpResult.success(this.luooUserService.updateById(luooUser));
+    }
+
+    @ApiOperation("用户详情")
+    @GetMapping("/detail")
+    public HttpResult detail(@RequestParam(name = "id") String id) {
+
+        return HttpResult.success(this.luooUserService.getById(id));
     }
 
 }
