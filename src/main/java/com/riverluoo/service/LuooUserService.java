@@ -13,4 +13,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface LuooUserService extends IService<LuooUser> {
 
+    /**
+     * 创建或更新用户
+     *
+     * @param phone 手机号码
+     * @return
+     */
+    LuooUser saveOrUpdate(String phone);
+
 }

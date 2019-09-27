@@ -36,9 +36,7 @@ public class MessageController {
     public HttpResult checkVerificationCode(@RequestParam("phone") String phone,
                                             @RequestParam("code") String code) {
 
-        boolean verification = this.messageService.checkVerificationCode(phone, code);
-
-        return HttpResult.success(verification);
+        return HttpResult.success(this.messageService.checkVerificationCode(phone, code));
     }
 
 }

@@ -5,10 +5,11 @@ import com.aliyuncs.IAcsClient;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
-import com.riverluoo.common.event.business.UserEvent;
+import com.riverluoo.common.exception.UserException;
+import com.riverluoo.entity.LuooUser;
+import com.riverluoo.service.LuooUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -30,11 +31,9 @@ public class MessageService {
     @Autowired
     private IAcsClient acsClient;
     @Autowired
-    private LoginService loginService;
+    private LuooUserService luooUserService;
     @Autowired
     private StringRedisTemplate redisTemplate;
-    @Autowired
-    private ApplicationEventPublisher publisher;
 
     private static final String PREFIX = "SMS_V_";
 
@@ -56,18 +55,16 @@ public class MessageService {
 
     }
 
-    public boolean checkVerificationCode(String phone, String code) {
+    public LuooUser checkVerificationCode(String phone, String code) {
         String value = this.redisTemplate.opsForValue().get(PREFIX + phone);
         boolean isPass = Objects.equals(code, value);
         if (isPass) {
             this.redisTemplate.delete(PREFIX + phone);
-            UserEvent userEvent = new UserEvent(phone);
-            this.publisher.publishEvent(userEvent);
-
-            this.loginService.login(phone);
+            LuooUser luooUser = this.luooUserService.saveOrUpdate(phone);
+            return luooUser;
         }
 
-        return isPass;
+        throw new UserException("验证码错误");
     }
 
 
