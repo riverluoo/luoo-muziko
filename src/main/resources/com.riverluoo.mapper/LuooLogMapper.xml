@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.riverluoo.mapper.LuooLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.riverluoo.entity.LuooLog">
+        <id column="id" property="id" />
+        <result column="description" property="description" />
+        <result column="username" property="username" />
+        <result column="start_time" property="startTime" />
+        <result column="spend_time" property="spendTime" />
+        <result column="base_path" property="basePath" />
+        <result column="uri" property="uri" />
+        <result column="url" property="url" />
+        <result column="method" property="method" />
+        <result column="parameter" property="parameter" />
+        <result column="user_agent" property="userAgent" />
+        <result column="ip" property="ip" />
+        <result column="create_time" property="createTime" />
+        <result column="create_person" property="createPerson" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_person" property="updatePerson" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, description, username, start_time, spend_time, base_path, uri, url, method, parameter, user_agent, ip, create_time, create_person, update_time, update_person
+    </sql>
+
+</mapper>
