@@ -18,3 +18,4 @@ script:
   - docker login --username=769789170@qq.com registry.cn-shanghai.aliyuncs.com -p=${password}
   - docker tag $(docker images -q luoo-muziko) registry.cn-shanghai.aliyuncs.com/loo/luo-muziko
   - docker push registry.cn-shanghai.aliyuncs.com/loo/luo-muziko
+
