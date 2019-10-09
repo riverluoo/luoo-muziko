@@ -21,4 +21,11 @@ public class GlobalExceptionController {
 
         return HttpResult.fail(message);
     }
+
+    @ResponseBody
+    @ExceptionHandler(AuthorizeException.class)
+    public HttpResult userException(AuthorizeException authorizeException) {
+
+        return HttpResult.fail("token过期 请重新登录!");
+    }
 }

@@ -11,4 +11,14 @@ import lombok.Data;
 public class LoginResponse {
 
     private LuooUser luooUser;
+
+    private String luooToken;
+
+    public LoginResponse() {
+    }
+
+    public LoginResponse(LuooUser luooUser, String luooToken) {
+        this.luooUser = luooUser;
+        this.luooToken = luooToken;
+    }
 }

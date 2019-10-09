@@ -6,6 +6,7 @@ import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.riverluoo.common.exception.UserException;
+import com.riverluoo.common.response.LoginResponse;
 import com.riverluoo.entity.LuooUser;
 import com.riverluoo.service.LuooUserService;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ import org.springframework.util.Assert;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
@@ -55,13 +57,16 @@ public class MessageService {
 
     }
 
-    public LuooUser checkVerificationCode(String phone, String code) {
+    public LoginResponse checkVerificationCode(String phone, String code) {
         String value = this.redisTemplate.opsForValue().get(PREFIX + phone);
         boolean isPass = Objects.equals(code, value);
         if (isPass) {
             this.redisTemplate.delete(PREFIX + phone);
+            String luooToken = UUID.randomUUID().toString().replaceAll("-", "");
             LuooUser luooUser = this.luooUserService.saveOrUpdate(phone);
-            return luooUser;
+            this.redisTemplate.opsForValue().set(luooToken, JSON.toJSONString(luooUser), 30, TimeUnit.MINUTES);
+
+            return new LoginResponse(luooUser, luooToken);
         }
 
         throw new UserException("验证码错误");
