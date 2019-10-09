@@ -1,14 +1,19 @@
 package com.riverluoo.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.riverluoo.entity.LuooUser;
 import com.riverluoo.mapper.LuooUserMapper;
 import com.riverluoo.service.LuooUserService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 /**
@@ -25,6 +30,8 @@ public class LuooUserServiceImpl extends ServiceImpl<LuooUserMapper, LuooUser> i
 
     @Autowired
     private LuooUserMapper luooUserMapper;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     @Override
     public LuooUser saveOrUpdate(String phone) {
@@ -35,5 +42,15 @@ public class LuooUserServiceImpl extends ServiceImpl<LuooUserMapper, LuooUser> i
         }
 
         return luooUser;
+    }
+
+    @Override
+    public String getUserId() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        LuooUser luooUser = JSON.parseObject(this.redisTemplate.opsForValue().get(request.getHeader("luoo-token")), LuooUser.class);
+        if (Objects.nonNull(luooUser)) {
+            return luooUser.getId();
+        }
+        return null;
     }
 }

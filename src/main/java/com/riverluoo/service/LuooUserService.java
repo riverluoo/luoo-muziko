@@ -21,4 +21,11 @@ public interface LuooUserService extends IService<LuooUser> {
      */
     LuooUser saveOrUpdate(String phone);
 
+    /**
+     * 查询当前用户id
+     *
+     * @return userId
+     */
+    String getUserId();
+
 }
