@@ -27,6 +27,11 @@ public class AuthorizeInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String luooToken = request.getHeader("luoo-token");
+
+        if(StringUtils.isBlank(luooToken)){
+            luooToken=request.getParameter("luoo-token");
+        }
+
         if (StringUtils.isBlank(luooToken)) {
             throw new AuthorizeException();
         }
