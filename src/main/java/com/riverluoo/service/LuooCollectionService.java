@@ -1,7 +1,7 @@
 package com.riverluoo.service;
 
-import com.riverluoo.entity.LuooCollection;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.riverluoo.entity.LuooCollection;
 
 /**
  * <p>

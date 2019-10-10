@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.riverluoo.entity.LuooUser;
 import com.riverluoo.mapper.LuooUserMapper;
 import com.riverluoo.service.LuooUserService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -47,10 +48,16 @@ public class LuooUserServiceImpl extends ServiceImpl<LuooUserMapper, LuooUser> i
     @Override
     public String getUserId() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        LuooUser luooUser = JSON.parseObject(this.redisTemplate.opsForValue().get(request.getHeader("luoo-token")), LuooUser.class);
+        String luooToken = request.getHeader("luoo-token");
+        if (StringUtils.isBlank(luooToken)) {
+            return "system";
+        }
+        String userEntity = this.redisTemplate.opsForValue().get(luooToken);
+        LuooUser luooUser = JSON.parseObject(userEntity, LuooUser.class);
         if (Objects.nonNull(luooUser)) {
             return luooUser.getId();
         }
-        return null;
+        return "system";
     }
+
 }
