@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.riverluoo.mapper.LuooReplyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.riverluoo.entity.LuooReply">
+        <id column="id" property="id" />
+        <result column="comment_id" property="commentId" />
+        <result column="reply_type" property="replyType" />
+        <result column="content" property="content" />
+        <result column="from_user_id" property="fromUserId" />
+        <result column="to_user_id" property="toUserId" />
+        <result column="create_time" property="createTime" />
+        <result column="create_person" property="createPerson" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_person" property="updatePerson" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, comment_id, reply_type, content, from_user_id, to_user_id, create_time, create_person, update_time, update_person
+    </sql>
+
+</mapper>

@@ -42,7 +42,7 @@ public class LuooVolumeController {
                            @ApiParam(name = "pageSize", value = "页长")
                            @RequestParam(required = false, defaultValue = "10") int pageSize,
                            @RequestParam(name = "id", required = false) @ApiParam("期刊编号") Integer id,
-                           @RequestParam(name = "title", required = false) @ApiParam("期刊编号") String title) {
+                           @RequestParam(name = "title", required = false) @ApiParam("期刊标题") String title) {
 
         Page<LuooVolume> page = new Page<>(pageId, pageSize);
 
