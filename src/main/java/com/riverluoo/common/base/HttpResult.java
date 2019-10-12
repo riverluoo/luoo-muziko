@@ -1,9 +1,10 @@
 package com.riverluoo.common.base;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class HttpResult<T> {
+public class HttpResult<T> implements Serializable {
 
     // 状态码：1成功，其他为失败
     public int code;

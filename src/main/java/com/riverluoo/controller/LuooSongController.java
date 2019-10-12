@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,7 +37,9 @@ public class LuooSongController {
 
     @ApiOperation("落网歌曲-列表")
     @GetMapping("/list")
+    @Cacheable(value = "LuooSonglist",key = "#volume")
     public HttpResult list(@RequestParam(name = "volume") @ApiParam("期刊编号") Integer volume) {
+
         List<LuooSong> list = this.luooSongService.list(new QueryWrapper<LuooSong>().eq(LuooSong.VOLUME_ID, volume).orderByAsc(LuooSong.SEQUENCE));
 
         return HttpResult.success(list);

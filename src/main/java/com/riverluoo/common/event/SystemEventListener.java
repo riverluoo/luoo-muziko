@@ -2,7 +2,9 @@ package com.riverluoo.common.event;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.riverluoo.common.event.business.UserEvent;
+import com.riverluoo.entity.LuooLog;
 import com.riverluoo.entity.LuooUser;
+import com.riverluoo.service.LuooLogService;
 import com.riverluoo.service.LuooUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
@@ -17,10 +19,13 @@ import java.util.Objects;
  * @since: 2019-09-26 15:04
  */
 @Component
-public class UserEventListener {
+public class SystemEventListener {
 
     @Autowired
     private LuooUserService luooUserService;
+    @Autowired
+    private LuooLogService luooLogService;
+
 
     @EventListener
     public void handleUserLogin(UserEvent userEvent) {
@@ -32,6 +37,13 @@ public class UserEventListener {
         }
 
         luooUserService.saveOrUpdate(luooUser);
+    }
+
+
+    @EventListener
+    public void handleLog(LuooLog luooLog) {
+
+        this.luooLogService.save(luooLog);
     }
 
 

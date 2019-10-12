@@ -3,10 +3,10 @@ package com.riverluoo.common.intercepter;
 import com.alibaba.fastjson.JSON;
 import com.riverluoo.common.util.RequestUtil;
 import com.riverluoo.entity.LuooLog;
-import com.riverluoo.service.LuooLogService;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -25,7 +25,7 @@ import java.util.Date;
 public class LogInterceptor implements HandlerInterceptor {
 
     @Autowired
-    private LuooLogService luooLogService;
+    private ApplicationEventPublisher publisher;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -38,7 +38,6 @@ public class LogInterceptor implements HandlerInterceptor {
         if (!(handler instanceof HandlerMethod)) {
             return;
         }
-
         LuooLog luooLog = new LuooLog();
 
         luooLog.setStartTime(new Date());
@@ -57,7 +56,6 @@ public class LogInterceptor implements HandlerInterceptor {
             luooLog.setDescription(methodAnnotation.value());
         }
 
-        this.luooLogService.save(luooLog);
-
+        this.publisher.publishEvent(luooLog);
     }
 }
