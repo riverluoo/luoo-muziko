@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -47,7 +48,11 @@ public class LuooUserServiceImpl extends ServiceImpl<LuooUserMapper, LuooUser> i
 
     @Override
     public String getUserId() {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        if (Objects.isNull(requestAttributes)) {
+            return "system";
+        }
+        HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
         String luooToken = request.getHeader("luoo-token");
         if (StringUtils.isBlank(luooToken)) {
             return "system";

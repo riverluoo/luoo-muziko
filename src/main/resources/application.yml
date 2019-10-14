@@ -19,6 +19,14 @@ spring:
       max-file-size: 500MB
   redis:
     host:
+  activemq:
+    pool:
+      enabled: false
+    broker-url:
+    user:
+    password:
+
+
 
 ## aliyun
 aliyun:
