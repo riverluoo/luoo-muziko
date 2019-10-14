@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.jms.Destination;
 import javax.jms.Queue;
+import javax.jms.Topic;
 
 /**
  * @auther: wangyang
@@ -16,6 +17,9 @@ public class MessageProducer {
 
     @Autowired
     private Queue queue;
+
+    @Autowired
+    private Topic topic;
 
     @Autowired
     private JmsMessagingTemplate jmsTemplate;
@@ -37,6 +41,16 @@ public class MessageProducer {
      */
     public void sendMessage(final String message) {
         jmsTemplate.convertAndSend(this.queue, message);
+    }
+
+    /**
+     * 发送消息，发布订阅
+     *
+     * @param message 消息内容
+     */
+    public void publish(String message) {
+        this.jmsTemplate.convertAndSend(this.topic, message);
+
     }
 
 
