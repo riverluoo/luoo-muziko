@@ -47,9 +47,8 @@ public class FileController {
 
 
             return HttpResult.success(url);
-
         }
-        return HttpResult.success("");
+        return HttpResult.success();
     }
 
 
