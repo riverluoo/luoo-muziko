@@ -1,5 +1,6 @@
 package com.riverluoo.service;
 
+import com.riverluoo.common.response.UserDetailResponse;
 import com.riverluoo.entity.LuooUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -27,5 +28,13 @@ public interface LuooUserService extends IService<LuooUser> {
      * @return userId
      */
     String getUserId();
+
+    /**
+     * 查询用户详情
+     *
+     * @param id 用户id
+     * @return
+     */
+    UserDetailResponse getUserDetail(String id);
 
 }

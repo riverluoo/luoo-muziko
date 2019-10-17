@@ -3,6 +3,7 @@ package com.riverluoo.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.riverluoo.common.response.UserDetailResponse;
 import com.riverluoo.entity.LuooUser;
 import com.riverluoo.mapper.LuooUserMapper;
 import com.riverluoo.service.LuooUserService;
@@ -16,6 +17,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -63,6 +65,20 @@ public class LuooUserServiceImpl extends ServiceImpl<LuooUserMapper, LuooUser> i
             return luooUser.getId();
         }
         return "system";
+    }
+
+    @Override
+    public UserDetailResponse getUserDetail(String id) {
+        UserDetailResponse userDetailResponse = new UserDetailResponse();
+        LuooUser luooUser = this.luooUserMapper.selectById(id);
+        userDetailResponse.setLuooUser(luooUser);
+        if (Objects.nonNull(luooUser) && Objects.nonNull(luooUser.getCreateTime())) {
+            Date createTime = luooUser.getCreateTime();
+            int days = (int) ((new Date().getTime() - createTime.getTime()) / (1000 * 3600 * 24));
+            userDetailResponse.setRegisterDay(days);
+        }
+
+        return userDetailResponse;
     }
 
 }

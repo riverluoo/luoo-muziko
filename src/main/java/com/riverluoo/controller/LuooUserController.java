@@ -41,7 +41,7 @@ public class LuooUserController {
     @GetMapping("/detail")
     public HttpResult detail(@RequestParam(name = "id") String id) {
 
-        return HttpResult.success(this.luooUserService.getById(id));
+        return HttpResult.success(this.luooUserService.getUserDetail(id));
     }
 
 }
