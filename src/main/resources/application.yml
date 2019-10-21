@@ -22,9 +22,16 @@ spring:
   activemq:
     pool:
       enabled: false
+      max-connections:
     broker-url:
     user:
     password:
+  jms:
+    listener:
+      concurrency:
+      max-concurrency:
+
+
 
 
 
