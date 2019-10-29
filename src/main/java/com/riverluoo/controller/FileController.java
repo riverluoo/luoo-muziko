@@ -42,8 +42,7 @@ public class FileController {
             String newName = Joiner.on("/").skipNulls().join(list);
             String bucketName = env.getProperty("aliyun.oss.bucketname");
             ossClient.putObject(bucketName, newName, file.getInputStream());
-            String url = new StringBuilder().append(
-                    "https://").append(bucketName + MARK + env.getProperty("aliyun.oss.endpoint")).append("/").append(newName).toString();
+            String url = "https://" + bucketName + MARK + env.getProperty("aliyun.oss.endpoint") + "/" + newName;
 
 
             return HttpResult.success(url);
