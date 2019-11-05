@@ -19,6 +19,7 @@ spring:
       max-file-size: 500MB
   redis:
     host:
+    port:
   activemq:
     pool:
       enabled: false
