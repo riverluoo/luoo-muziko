@@ -1,0 +1,15 @@
+stages:
+- name: build
+  steps:
+  - runScriptConfig:
+      image: maven:3.6.0-jdk-8-alpine
+      shellScript: mvn clean package -DskipTests
+- name: push
+  steps:
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: registry.cn-shanghai.aliyuncs.com/loo/cms:${CICD_EXECUTION_ID}
+      pushRemote: true
+      registry: registry.cn-shanghai.aliyuncs.com
+timeout: 60
