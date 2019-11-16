@@ -9,7 +9,11 @@ stages:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: registry.cn-shanghai.aliyuncs.com/loo/cms:${CICD_EXECUTION_ID}
+      tag: registry.cn-shanghai.aliyuncs.com/loo/luo-muziko:${CICD_EXECUTION_ID}
       pushRemote: true
       registry: registry.cn-shanghai.aliyuncs.com
+- name: deploy
+  steps:
+    - applyYamlConfig:
+        path: ./deployment.yaml
 timeout: 60
