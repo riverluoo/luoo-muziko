@@ -1,19 +1,19 @@
 stages:
-- name: build
-  steps:
-  - runScriptConfig:
-      image: maven:3.6.0-jdk-8-alpine
-      shellScript: mvn clean package -DskipTests
-- name: push
-  steps:
-  - publishImageConfig:
-      dockerfilePath: ./Dockerfile
-      buildContext: .
-      tag: registry.cn-shanghai.aliyuncs.com/loo/luo-muziko:${CICD_EXECUTION_ID}
-      pushRemote: true
-      registry: registry.cn-shanghai.aliyuncs.com
-- name: deploy
-  steps:
-    - applyYamlConfig:
-        path: ./deployment.yaml
+  - name: build
+    steps:
+      - runScriptConfig:
+          image: maven:3.6.0-jdk-8-alpine
+          shellScript: mvn clean package -DskipTests
+  - name: push
+    steps:
+      - publishImageConfig:
+          dockerfilePath: ./Dockerfile
+          buildContext: .
+          tag: registry.cn-shanghai.aliyuncs.com/loo/luo-muziko:${CICD_EXECUTION_ID}
+          pushRemote: true
+          registry: registry.cn-shanghai.aliyuncs.com
+  - name: deploy
+    steps:
+      - applyYamlConfig:
+          path: ./deployment.yaml
 timeout: 60
