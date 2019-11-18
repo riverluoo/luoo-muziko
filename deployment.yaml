@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: luoo-muziko-7bb8c69889-gr8b5
+  name: luoo-muziko
   namespace: muziko
 spec:
   progressDeadlineSeconds: 600
