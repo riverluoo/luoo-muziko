@@ -41,7 +41,9 @@ public class LuooCollectionController {
     @PostMapping("/song")
     public HttpResult likeSong(@RequestParam(name = "songId") @ApiParam("歌曲编号") Integer songId) {
 
+
         return HttpResult.success(this.luooCollectionService.insertOrDeleteSong(songId));
+
     }
 
     @ApiOperation("收藏歌单")
