@@ -10,9 +10,9 @@ spring:
     time-zone: GMT+8
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://39.96.69.79:3307/luoo?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://114.67.111.162:31142/luoo?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
-    password:
+    password: password
   servlet:
     multipart:
       max-request-size: 500MB
@@ -22,9 +22,9 @@ spring:
 ## aliyun
 aliyun:
   oss.bucketname: riverluooo
-  oss.endpoint:
-  oss.accessKeyId:
-  oss.accessKeySecret:
+  oss.endpoint: ss
+  oss.accessKeyId: ss
+  oss.accessKeySecret: ss
 
 mybatis-plus:
   configuration:
