@@ -12,8 +12,8 @@ branches:
     - master
 
 script:
-  - mvn clean
-  - mvn install
+  - ./mvnw  clean
+  - ./mvnw  install
   - docker build -t luoo-muziko .
   - docker login --username=769789170@qq.com registry.cn-shanghai.aliyuncs.com -p=${password}
   - docker tag $(docker images -q luoo-muziko) registry.cn-shanghai.aliyuncs.com/loo/luo-muziko:$(date +%s)
